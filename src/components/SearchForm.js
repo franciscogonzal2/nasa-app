@@ -5,6 +5,7 @@ export class SearchForm extends Component{
     state = {
      inputlatlong: '',
      results:'',
+     error:false,
     }
     handleChange = (e) => {
         this.setState({inputlatlong: e.target.value})
@@ -20,17 +21,28 @@ export class SearchForm extends Component{
         .then(results => {
             const outside = URL.createObjectURL(results)
             console.log(outside)
+            if(results.type === "image/png"){
             this.setState({
                 results:outside
             })
+        } else {
+            this.setState({
+                results:'no Info',
+                error:true
+            })
         }
-            )
+        }
+        )
     }
     renderResults(){
-        const {results} = this.state
+        const {results, error} = this.state
         return( 
+            !error?
             <div>
                 <img style={{width:"40%" }} src={results} alt="lon and lat"/>
+            </div>:
+            <div>
+             We do not have register for this Location
             </div>
         )
     }
