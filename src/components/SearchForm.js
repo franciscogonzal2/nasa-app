@@ -34,15 +34,33 @@ export class SearchForm extends Component{
         }
         )
     }
+    newSearch = () =>{
+     this.setState({
+            results:'',
+        })
+    }
     renderResults(){
         const {results, error} = this.state
         return( 
             !error?
             <div>
+            <div>
                 <img style={{width:"40%" }} src={results} alt="lon and lat"/>
-            </div>:
+            </div>
+            <button className="button is-info" onClick={this.newSearch}>
+                New Search
+            </button>
+            </div>
+            :
+            <div>
             <div>
              We do not have register for this Location
+            </div>
+            <div>
+            <button className="button is-info" onClick={this.newSearch}>
+                New Search
+            </button>
+            </div>
             </div>
         )
     }
